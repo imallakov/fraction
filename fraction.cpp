@@ -1,4 +1,4 @@
-﻿// fraction.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// fraction.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -10,29 +10,18 @@ private:
 public:
     fraction(int a = 1, int b = 1)
     {
-        try
+        if (b == 0)
         {
-            if (b == 0)
-            {
-                num = 0;
-                den = 1;
-                throw "Error! Denominator can't be equal to zero!";
-            }
-            else
-            {
-                num = a;
-                den = b;
-                reduce();
-            }
+            num = 0;
+            den = 1;
+            throw "Error! Denominator can't be equal to zero!";
         }
-        catch (const char* str)
+        else
         {
-            std::cout << str << std::endl;
+            num = a;
+            den = b;
+            reduce();
         }
-        /*catch (...)
-        {
-            std::cout << "Error!" << std::endl;
-        }*/
     }
     void show() const
     {
@@ -111,7 +100,7 @@ public:
     {
         fraction B(num * A.num, den * A.den);
         B.reduce();
-        return *this;
+        return B;
     }
     fraction operator/ (const fraction& A) const
     {
@@ -178,6 +167,13 @@ std::ostream& operator<<(std::ostream& out, const fraction& X) {
 
 int main()
 {
-    fraction A(5, 0);
-    std::cout << A << std::endl;
+    try
+    {
+        fraction A(5, 0);
+        std::cout << A << std::endl;
+    }
+    catch (const char* str)
+    {
+        std::cout << str << std::endl;
+    }
 }
